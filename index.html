@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="tr-TR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sonat Saygın Ipek - Gorsel Programlama -II</title>
+
+    <!-- Style Sheets  -->
+    <link rel="stylesheet" href="/style/global.css">
+    <link rel="stylesheet" href="/style/main.css">
+
+    <!-- Animate & Hover CSS -->
+    <link rel="stylesheet" href="/style/animate.css">
+    <link rel="stylesheet" href="/style/hover.css">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- eCharts JS -->
+    <script src="/js/echarts.js"></script>
+
+    <!-- Pivot Table -->
+    <!-- external libs from cdnjs -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+    <!-- PivotTable.js libs from ../dist -->
+    <link rel="stylesheet" type="text/css" href="./pivot.css">
+    <script type="text/javascript" src="./pivot.js"></script>
+    
+    <link rel="stylesheet" href="/style/pivot.css">
+    <script src="/js/pivot.js"></script>
+    <!-- jQuery -->
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1>Logo Brand</h1>
+
+        <ul class="navbar-items">
+            <li><a href="#" class="navbar-item">Link -1</a></li>
+            <li><a href="#" class="navbar-item">Link -2</a></li>
+            <li><a href="#" class="navbar-item">Link -3</a></li>
+        </ul>
+
+        <ul class="navbar-buttons">
+            <li><a href="#" class="navbar-button__secondary">Kaydol</a></li>
+            <li><a href="#" class="navbar-button__primary">Giriş Yap</a></li>
+        </ul>
+    </nav>
+
+    <!-- Banner  -->
+    <main class="banner">
+        <div class="container" transition-style="in:circle:hesitate">
+            <div class="text-content">
+                <h2>Slogan</h2>
+                <a href="#" id="tableChange" class="hvr-icon hvr-icon-float-away"><i class="fa-solid fa-newspaper hvr-icon hvr-icon-float-away"></i>Tabloyu Ön Plana Çıkart</a>
+            </div>
+            <div class="img-content">
+                <img src="assets/banner-image.png" alt="Banner image">
+            </div>
+        </div>
+    </main>
+   
+    <!-- Grafik -->
+    <div id="main" style="width: 1240px;height:400px;"></div>
+ 
+    <!-- Tablom -->
+    <div id="output" style="margin: 30px;"></div>
+
+
+    <!-- İmages -->
+    <section class="images">
+        <div class="image-1">
+            <img src="assets/image-1.jpg" alt="">
+        </div>
+
+        <div class="image-2">
+            <img src="assets/image-2.jpg" alt="">
+        </div>
+
+        <div class="image-3">
+            <img src="assets/image-3.jpg" alt="">
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <section id="footer">
+
+        <div class="footer-top">
+            <div class="container_footer">
+                <p>Sosyal Medya hesaplarımızdan bizi takip edebilirsiniz:</p>
+                <div class="links">
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+            </div>
+           
+        </div>
+
+        <div class="footer-content">
+            <div class="container_footer">
+                <div class="marka">
+                    <h6>Logo</h6>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda beatae veritatis, nostrum distinctio unde nam labore necessitatibus ducimus accusamus sunt.</p>
+                </div>
+                <div class="links">
+                    <h6>Sayfa Linkleri</h6>
+                    <a href="#homepage">Ana Sayfa</a>
+                    <a href="#contact">İletişim</a>
+                </div>
+                <div class="contact">
+                    <h6>İletişim</h6>
+                    <span><i class="fa-solid fa-house"></i><a href="#">Caferağa Mah., Kadıköy/İST.</a></span>
+                    <span><i class="fa-solid fa-phone"></i><a href="tel:+#">+90 123 456 7890</a></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bot">
+            <div class="container_footer">
+                <p>© 2022 Copyright - Sonat Saygın İPEK</p>
+            </div>
+        </div>
+        
+    </section>
+
+    <script>
+        // This example shows how to prepopulate the UI on
+    // load using the "Canadian Parliament 2012" dataset.
+
+    $(function(){
+        $.getJSON("mps.json", function(mps) {
+            $("#output").pivotUI(mps, {
+                rows: ["Province"],
+                cols: ["Party"],
+                aggregatorName: "Integer Sum",
+                vals: ["Age"],
+                rendererName: "Heatmap",
+                rendererOptions: {
+                    table: {
+                        clickCallback: function(e, value, filters, pivotData){
+                            var names = [];
+                            pivotData.forEachMatchingRecord(filters,
+                                function(record){ names.push(record.Name); });
+                            alert(names.join("\n"));
+                        }
+                    }
+                }
+            });
+        });
+     });
+    </script>
+    <script src="/js/echartsConfig.js"></script>   
+</body>
+</html>
